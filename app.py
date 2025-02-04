@@ -1,7 +1,9 @@
 from  flask import Flask, request, jsonify
 import requests
+from flask_cors import CORS
 import math
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/', methods=['GET'])
 def home():
@@ -68,4 +70,4 @@ def classify_number():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000,debug=True)
+    app.run(host="0.0.0.0", port=5000,debug=False)
