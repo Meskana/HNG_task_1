@@ -47,7 +47,10 @@ def classify_number():
     num = request.args.get('number')
 
     if not num or not num.isdigit():
-        return jsonify({"error": "Invalid input. Please provide a valid integer."}), 400
+        return jsonify({
+    "number": "alphabet",
+    "error": True
+}), 400
 
     num = int(num)
 
