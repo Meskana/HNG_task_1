@@ -26,9 +26,18 @@ def is_perfect(n):
 
 def is_armstrong(n):
     """Check if a number is an Armstrong number."""
-    digits = list(map(int, str(n)))
+
+    num_str = str(n)
+    if num_str.startswith('-'):
+        num_str = num_str[1:]
+
+    digits = list(map(int, num_str))
     power = len(digits)
-    return sum(d ** power for d in digits) == n
+
+    
+    return ""if sum(d ** power for d in digits) == abs(n) else "-"
+
+
 
 def get_fun_fact(n):
     """Fetch a fun fact about the number from Numbers API."""
@@ -46,7 +55,7 @@ def classify_number():
     """API endpoint to classify a number based on its mathematical properties."""
     num = request.args.get('number')
 
-    if not num or not num.isdigit():
+    if not num :
         return jsonify({
     "number": "alphabet",
     "error": True
@@ -65,8 +74,8 @@ def classify_number():
         "is_prime": is_prime(num),
         "is_perfect": is_perfect(num),
         "properties": properties,
-        "digit_sum": f"{sum(map(int, str(num)))},//sum of its digits",
-        "fun_fact": f"{get_fun_fact(num)}because 3^3 + 7^3 + 1^3 = 371 //gotten from the numbers API"
+        "digit_sum":sum(map(int, str(abs(num)))),
+        "fun_fact": get_fun_fact(num)
     }
 
     return jsonify(response_data)
