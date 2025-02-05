@@ -55,7 +55,7 @@ def classify_number():
     """API endpoint to classify a number based on its mathematical properties."""
     num = request.args.get('number')
 
-    if not num :
+    if not num or not num.isdigit() :
         return jsonify({
     "number": "alphabet",
     "error": True
